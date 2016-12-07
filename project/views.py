@@ -1,5 +1,1 @@
-from project import app
-
-@app.route('/')
-def index():
-    return 'Hello World!'
+# the 'main' module is used as a root views file
