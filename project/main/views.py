@@ -5,4 +5,8 @@ from .. import models, db
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    products = models.Product.query.all()
+
+    return render_template('index.html', products=products)
+
+

@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Hello World</title>
+  <meta charset="UTF-8">
+  <title>Hello World</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
+  <h1>Hello World!</h1>
+  {% if products %}
+    <ul>
+    {% for product in products %}
+    <li>
+      <div>
+        <a href="{{ product.url }}" target="_blank">{{ product.name }}</a>
+        <strong>{{ product.price }}</strong>
+      </div>
+      <div>
+        {% for image in product.images.split(' ') %}
+          <img src="{{ image }}" alt="{{ product.name }}" style="max-height: 50px;">
+        {% endfor %}
+      </div>
+    </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
 </body>
 </html>
