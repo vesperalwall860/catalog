@@ -2,26 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css">
   <title>Hello World</title>
 </head>
 <body>
-  <h1>Hello World!</h1>
-  {% if products %}
-    <ul>
-    {% for product in products %}
-    <li>
-      <div>
-        <a href="{{ product.url }}" target="_blank">{{ product.name }}</a>
-        <strong>{{ product.price }}</strong>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="descript">Продажа квадрокоптеров с доставкой по всей Украине.</h1>
       </div>
-      <div>
-        {% for image in product.images.split(' ') %}
-          <img src="{{ image }}" alt="{{ product.name }}" style="max-height: 50px;">
-        {% endfor %}
+    </div>
+    {% if products %}
+      <div class="row sort">
+        <div class="col-md-12">
+          <h3>Сортировка:</h3>
+          <button id="sort-by-price" data-asc="false" class="btn btn-primary">По цене <span class="glyphicon glyphicon-sort-by-attributes"></span></button>
+        </div>
       </div>
-    </li>
-    {% endfor %}
-    </ul>
-  {% endif %}
+      <div class="catalog">
+        <div class="row catalog">
+          {% for product in products %}
+            <div class="col-md-4 product">
+              <div class="inner">
+                <img src="http://modelistam.com.ua/{{ product.images.split(' ')[0] }}" alt="{{ product.name }}">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.chars|striptags|truncate(50) }}</p>
+                <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
+                <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary">Купить</a>
+              </div>
+              <div class="product-popup-bg"></div>
+              <div class="product-popup">
+                <img src="http://modelistam.com.ua/{{ product.images.split(' ')[0] }}" alt="{{ product.name }}">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.chars|safe }}</p>
+                <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
+                <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary">Купить</a>
+              </div>
+            </div>
+            {% if loop.index % 3 == 0 %}
+              </div>
+              <div class="row">
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <script src="/static/js/lightgallery.min.js"></script>
+  <!-- lightgallery plugins -->
+  <!-- <script src="/static/js/lg-thumbnail.min.js"></script>
+  <script src="/static/js/lg-fullscreen.min.js"></script> -->
+
+  <script src="/static/js/main.js"></script>
 </body>
 </html>

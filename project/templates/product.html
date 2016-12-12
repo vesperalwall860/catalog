@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+</head>
+<body>
+  <h1>{{ product.name }}</h1>
+  <h2>{{ product.price }}</h2>
+  {% for image in product.images.split(' ') %}
+    <img src="http://modelistam.com.ua/{{ image }}" alt="{{ product.name }}">
+  {% endfor %}
+  <div>
+    {{ product.chars|safe }}
+  </div>
+</body>
+</html>

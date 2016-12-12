@@ -6,3 +6,4 @@ class Product(db.Model):
     price = db.Column(db.Float)
     url = db.Column(db.String)
     images = db.Column(db.Text)
+    chars = db.Column(db.Text)
