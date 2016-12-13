@@ -5,7 +5,9 @@ from .. import models, db
 
 @main.route('/')
 def index():
-    products = models.Product.query.order_by(models.Product.price.asc()).all()
+    products = models.Product.query\
+                    .filter(models.Product.price > 0)\
+                    .order_by(models.Product.price.asc()).all()
 
     return render_template('index.html', products=products)
 
