@@ -22,11 +22,13 @@ def product(product_id):
 @main.route('/sort-by-price/<sort_type>')
 def sort_by_price(sort_type):
     if sort_type == 'desc':
-        products = models.Product.query.order_by(
-                        models.Product.price.desc()).all()
+        products = models.Product.query\
+                        .filter(models.Product.price > 0)\
+                        .order_by(models.Product.price.desc()).all()
     else:
-        products = models.Product.query.order_by(
-                        models.Product.price.asc()).all()
+        products = models.Product.query\
+                        .filter(models.Product.price > 0)\
+                        .order_by(models.Product.price.asc()).all()
 
     return render_template('catalog.html', products=products)
 
