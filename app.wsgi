@@ -1,7 +1,12 @@
-#!venv/bin/python
+activate_this = '/home/apps/catalog/venv/bin/activate_this.py'
+execfile(activate_this, dict(__file__=activate_this))
+
 import os
 import warnings
+import sys
 warnings.filterwarnings("ignore")
+
+sys.path.insert(0, '/home/apps/catalog')
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -24,5 +29,8 @@ app = create_app('production')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
+application = app
+
 if __name__ == '__main__':
-    WSGIServer(app).run()
+
+    application = app
