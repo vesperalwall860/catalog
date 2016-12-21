@@ -1,102 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="/static/css/style.css">
-  <title>Продажа квадрокоптеров с доставкой по всей Украине.</title>
-</head>
-<body>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter41554209 = new Ya.Metrika({
-                    id:41554209,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true,
-                    trackHash:true
-                });
-            } catch(e) { }
-        });
-
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/41554209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-10450990-9', 'auto');
-  ga('send', 'pageview');
-
-</script>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1 class="descript">Продажа квадрокоптеров с доставкой по всей Украине.</h1>
-        <h2>Звоните сейчас <span style="color: #337ab7;">(063) 205-64-32</span> (с 9:00 до 21:00 пн-сб)</h2>
+{% extends "base.html" %}
+{% block content %}
+  {% if products %}
+    <div class="row sort">
+      <div class="col-md-6">
+        <h3>Сортировка:</h3>
+        <button id="sort-by-price" data-asc="false" class="btn btn-primary">По цене <span class="glyphicon glyphicon-sort-by-attributes"></span></button>
       </div>
     </div>
-    {% if products %}
-      <div class="row sort">
-        <div class="col-md-6">
-          <h3>Сортировка:</h3>
-          <button id="sort-by-price" data-asc="false" class="btn btn-primary">По цене <span class="glyphicon glyphicon-sort-by-attributes"></span></button>
-        </div>
-      </div>
-      <div class="catalog">
-        <div class="row catalog">
-          {% for product in products %}
-            <div class="col-md-4 product">
-              <div class="inner">
-                <img src="http://modelistam.com.ua/{{ product.images.split(' ')[0] }}" alt="{{ product.name }}">
-                <h2>{{ product.name }}</h2>
-                <p>{{ product.chars|striptags|truncate(50) }}</p>
-                <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
-                <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary buy-btn">Подробнее</a>
-              </div>
-              <div class="product-popup-bg"></div>
-              <div class="product-popup">
-                <img src="http://modelistam.com.ua/{{ product.images.split(' ')[0] }}" alt="{{ product.name }}">
-                <h2>{{ product.name }}</h2>
-                <p>{{ product.chars|safe }}</p>
-                <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
-                <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary buy-btn">Подробнее</a>
-              </div>
+    <div class="catalog">
+      <div class="row catalog">
+        {% for product in products %}
+          <div class="col-md-4 product">
+            <div class="inner">
+              <img src="http://modelistam.com.ua/{{ product.images.split(' ')[0] }}" alt="{{ product.name }}">
+              <h2>{{ product.name }}</h2>
+              <p>{{ product.chars|striptags|truncate(50) }}</p>
+              <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
+              <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary buy-btn">Подробнее</a>
             </div>
-            {% if loop.index % 3 == 0 %}
-              </div>
-              <div class="row">
-            {% endif %}
-          {% endfor %}
-        </div>
+            <div class="product-popup-bg"></div>
+            <div class="product-popup">
+              <img src="http://modelistam.com.ua/{{ product.images.split(' ')[0] }}" alt="{{ product.name }}">
+              <h2>{{ product.name }}</h2>
+              <p>{{ product.chars|safe }}</p>
+              <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
+              <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary buy-btn">Подробнее</a>
+            </div>
+          </div>
+          {% if loop.index % 3 == 0 %}
+            </div>
+            <div class="row">
+          {% endif %}
+        {% endfor %}
       </div>
-    {% endif %}
-  </div>
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-
-  <script src="/static/js/lightgallery.min.js"></script>
-  <!-- lightgallery plugins -->
-  <!-- <script src="/static/js/lg-thumbnail.min.js"></script>
-  <script src="/static/js/lg-fullscreen.min.js"></script> -->
-
-  <script src="/static/js/main.js"></script>
-</body>
-</html>
+    </div>
+  {% endif %}
+{% endblock %}
