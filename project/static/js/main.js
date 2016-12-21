@@ -20,15 +20,15 @@ $(document).ready(function() {
             });
         }
     });
-    $('.product .inner .buy-btn').click(function(e) {
-        e.preventDefault();
-        $(this).parent().parent().children('.product-popup').fadeIn();
-        $(this).parent().parent().children('.product-popup-bg').fadeIn();
-    });
-    $('.product-popup-bg').click(function() {
-        $(this).fadeOut();
-        $(this).parent().children('.product-popup').fadeOut();
-    });
+    // $('.product .inner .buy-btn').click(function(e) {
+    //     e.preventDefault();
+    //     $(this).parent().parent().children('.product-popup').fadeIn();
+    //     $(this).parent().parent().children('.product-popup-bg').fadeIn();
+    // });
+    // $('.product-popup-bg').click(function() {
+    //     $(this).fadeOut();
+    //     $(this).parent().children('.product-popup').fadeOut();
+    // });
     $(".image").click(function() {
         var image = $(this).attr("rel");
         $('#image').hide();

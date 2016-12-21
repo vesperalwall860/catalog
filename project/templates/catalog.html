@@ -7,7 +7,7 @@
           <h2>{{ product.name }}</h2>
           <p>{{ product.chars|striptags|truncate(50) }}</p>
           <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
-          <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary">Купить</a>
+          <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary">Подробнее</a>
         </div>
         <div class="product-popup-bg"></div>
         <div class="product-popup">
@@ -15,7 +15,7 @@
           <h2>{{ product.name }}</h2>
           <p>{{ product.chars|safe }}</p>
           <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
-          <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary">Купить</a>
+          <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary">Подробнее</a>
         </div>
       </div>
       {% if loop.index % 3 == 0 %}
