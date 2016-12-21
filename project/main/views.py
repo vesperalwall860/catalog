@@ -19,6 +19,19 @@ def product(product_id):
     return render_template('product.html', product=product)
 
 
+# @main.route('/delete/<int:product_id>')
+# def delete(product_id):
+#     product = models.Product.query.get(product_id)
+
+#     if not product:
+#         return redirect(url_for('main.index'))
+
+#     db.session.delete(product)
+#     db.session.commit()
+
+#     return 'Product #%d has been deleted.' % product_id
+
+
 @main.route('/sort-by-price/<sort_type>')
 def sort_by_price(sort_type):
     if sort_type == 'desc':
@@ -31,4 +44,7 @@ def sort_by_price(sort_type):
                         .order_by(models.Product.price.asc()).all()
 
     return render_template('catalog.html', products=products)
+
+
+
 

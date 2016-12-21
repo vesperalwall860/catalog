@@ -56,15 +56,36 @@
     </div>
     {% if products %}
       <div class="row sort">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <h3>Сортировка:</h3>
           <button id="sort-by-price" data-asc="false" class="btn btn-primary">По цене <span class="glyphicon glyphicon-sort-by-attributes"></span></button>
+        </div>
+        <div class="col-md-6">
+          <h3>Фильтр:</h3>
+          <div class="form-control">
+            <select id="filter-by-price"></select>
+          </div>
         </div>
       </div>
       <div class="row filter">
         <div class="col-md-12">
           <h3>Фильтр:</h3>
           <button></button>
+        </div>
+      </div>
+      <div class="row filter2">
+        <div class="col-md-12">
+          <div id="slider-container"></div>
+          <p>
+              <label for="amount">Price range:</label>
+              <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+          </p>
+          <div id="computers">
+              <div class="system" data-price="299">div1 - 299</div>
+              <div class="system" data-price="599">div2 - 599</div>
+              <div class="system" data-price="1099">div3 - 1099</div>
+          </div>
+          <div id="slider-range"></div>
         </div>
       </div>
       <div class="catalog">
@@ -76,7 +97,7 @@
                 <h2>{{ product.name }}</h2>
                 <p>{{ product.chars|striptags|truncate(50) }}</p>
                 <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
-                <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary">Купить</a>
+                <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary buy-btn">Купить</a>
               </div>
               <div class="product-popup-bg"></div>
               <div class="product-popup">
@@ -84,7 +105,7 @@
                 <h2>{{ product.name }}</h2>
                 <p>{{ product.chars|safe }}</p>
                 <strong class="price">{{ '{:,.2f}'.format(product.price) }}<span>грн</span></strong>
-                <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary">Купить</a>
+                <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn btn-primary buy-btn">Купить</a>
               </div>
             </div>
             {% if loop.index % 3 == 0 %}
@@ -96,7 +117,7 @@
       </div>
     {% endif %}
   </div>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
   <script src="/static/js/lightgallery.min.js"></script>
   <!-- lightgallery plugins -->
